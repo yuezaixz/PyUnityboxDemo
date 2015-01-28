@@ -2,6 +2,8 @@
 --------------------------------------
 #概述
 该工程只是为了对UnityBox的API接口做简单的示范，对于界面的样式、代码风格、实现方式都请勿模仿。
+#环境
+Demo的开发环境为MAC OS 10.9，如果使用的系统不对应，以下过程或许会有些微差异，请自行解决，谢谢！
 #环境搭建
 ```bash
 #如果为安装pip请自行搜索如何安装
@@ -10,6 +12,7 @@ pip install virtualenv
 pip install virtualenvwrapper
 vim ~/.bash_profile
 #添加 source /usr/local/bin/virtualenvwrapper.sh
+#添加后可能要重启中断，如果下列命令无法使用，则考虑重启中断
 
 #创建虚拟环境
 mkvirtualenv PyUnityBoxDemoEnv
@@ -24,20 +27,12 @@ sqlite3 /tmp/demo.db < schema.sql
 ```
 
 #API接入修改
-修改demo.py文件中的如下代码,修改后记得删除抛出的异常段。如果不清楚如何申请获得账号，可以参考[Unity-Box Account](https://api.unity-box.com/services/doc/en)
+修改demo.py文件中的如下代码,填写申请账号后获得的信息，暂时DEMO中已经填好了测试数据，真是环境时请修改。如果不清楚如何申请获得账号，可以参考[Unity-Box Account](https://api.unity-box.com/services/doc/en)
 
 ```python
-
-SECRET_KEY = 'development key'
-#INPUT YOUR API USER,PASSWORD AND CLIENT_ID , THEN DELETE THE LINE.
-raise Exception,'PLEASE INPUT YOUR API USER,PASSWORD AND CLIENT_ID'
-#TODO 
-API_USERNAME = 'PLEASE_INPUT_YOUR_API_USER'
-#TODO 
-API_PASSWORD = 'PLEASE_INPUT_YOUR_API_PASSWORD'
-#TODO 
-API_CLIENT_ID = 'PLEASE_INPUT_YOUR_API_CLIENT_ID'
-
+API_USERNAME = 'e33a57ff3af940ad'
+API_PASSWORD = 'cde662ed9c9a4998'
+API_CLIENT_ID = '7895193cda252a8070dd'
 ```
 
 #运行工程
