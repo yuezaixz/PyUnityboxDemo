@@ -8,6 +8,7 @@ import json
 # configuration
 DATABASE = '/tmp/demo.db'
 DEBUG = True
+SECRET_KEY = 'development key'
 #warning
 API_USERNAME = 'e33a57ff3af940ad'
 API_PASSWORD = 'cde662ed9c9a4998'
