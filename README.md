@@ -24,7 +24,7 @@ sqlite3 /tmp/demo.db < schema.sql
 ```
 
 #API接入修改
-修改demo.py文件中的如下代码,修改后记得删除抛出的异常段。如果不清楚如何申请获得账号，可以参考[Unity-Box Account](https://api.unity-box.com/services/doc/en#account)
+修改demo.py文件中的如下代码,修改后记得删除抛出的异常段。如果不清楚如何申请获得账号，可以参考[Unity-Box Account](https://api.unity-box.com/services/doc/en)
 
 ```python demo.py
 SECRET_KEY = 'development key'
