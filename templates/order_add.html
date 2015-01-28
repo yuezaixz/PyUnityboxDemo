@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block body %}
+    <script type="text/javascript">
+        $(function(){
+            $("#inputPhone").mask("99-999-999");
+            $.ajax({
+              async:true,
+              cache:true,
+              url:"https://api.unity-box.com/services/pickuppoints/",
+              success:function(data,status){
+                if(status!=="success"||!data){
+                  return;
+                }
+                var pickuppoints = data.results;
+                var select = $("#select_pickuppoint").find("select");
+                select.empty();
+                $("<option value=''>Please select a pickup point</option>").appendTo(select);
+                for(var index=0;index<pickuppoints.length;index++){
+                  var point = pickuppoints[index];
+                  $("<option value='"+point.id+"'>"+point.name+"</option>").appendTo(select);
+                }
+              },
+              error:function(){
+                console.log(arguments);
+              }
+            });
+            
+        });
+    </script>
+  <form class="form-horizontal"  action="{{ url_for('add_order') }}" method="post" >
+    <div class="form-group">
+        <label for="inputName" class="col-md-3 control-label" >Product Name</label>
+        <div class="col-md-7 text-left">
+            <input type="text" class="form-control" id="inputName" placeholder="Product Name"  name="product_name" data-error="Required" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <!--div class="col-md-2 text-left help-block with-errors"></div-->
+        <div class="col-md-2 text-left"></div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail1" class="col-md-3 control-label" >Consignee Name</label>
+        <div class="col-md-7  text-left">
+            <input type="text" class="form-control" id="inputEmail1" placeholder="Name" name="consignee_name"  data-error="Required" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="col-md-2 text-left"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPhone" class="color-bluebold col-md-3 control-label" >Consignee Phone (+65)</label>
+        <div class="col-md-7 text-left ">
+            <input type="text" pattern="^[389]\d-\d{3}-\d{3}$" data-mask="99-999-999" class="form-control" id="inputPhone" placeholder="Phone Number" name="otp_phone_number" data-error="Invalid Singapore Phone" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="col-md-2 text-left"></div>
+    </div>
+    <div class="form-group">
+        <label for="inputPhone" class="col-md-3 control-label">Consignee Email</label>
+        <div class="col-md-7 text-left">
+            <input type="email" class="form-control"  placeholder="Email" name="consignee_email" data-error="Invalid Email" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="col-md-2 text-left"></div>
+    </div>
+    <div class="form-group">
+        <label for="inputCountry" class="col-md-3 control-label" >Pickup Point </label>
+        <div id="select_pickuppoint" class="col-md-7 text-left">
+            <select class="form-control" name="pickuppoint" data-error="Please select a Pickup Point." required="">
+            </select>
+             <div class="help-block"><a href="http://biz.unity-box.com/locations/">About Pickup Point</a></div>
+        </div>
+        <div class="col-md-2 text-left"></div>
+    </div>
+    <div class="form-group">
+        <label for="extra_code" class="col-md-3 control-label">Extra Code</label>
+        <div class="col-md-7 text-left">
+            <input type="text"  class="form-control" pattern="^\s*.{0,16}\s*$" name="extra_code" placeholder="Extra Memo" data-error="Invalid extra code,max length 16"/>
+            <div class="help-block with-errors"></div>
+        </div>
+        <div class="col-md-2 text-left"></div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="inputPhone" class="col-md-3 control-label">Remark</label>
+        <div class="col-md-7 text-left">
+            <textarea class="form-control"  placeholder="Your remarks please!" rows="6" cols="30" name="remark"></textarea>
+        </div>
+        <div class="col-md-2 text-left"></div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9 success" id="checkout_msg"></div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <span class="btn btn-icon-left"><input type="submit" value="Submit" /></span>
+      </div>
+    </div>
+  </form>
+{% endblock %}

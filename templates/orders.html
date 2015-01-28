@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <script type="text/javascript">
+    function print_qrcode(serial_number){
+       var printWindow = window.open('', 'Print Window','height=500,width=600');
+
+       printWindow.document.write('<html><head><title>Print Window</title>');
+
+       printWindow.document.write('<style type="text/css" media="print">        @page         {            size: auto;   /* auto is the current printer page size */            margin: 0mm;  /* this affects the margin in the printer settings */        }        body         {            background-color:#FFFFFF; border: solid 0px black ; margin: 0px; /* the margin on the content before printing */       } ');
+
+       printWindow.document.write(' @media screen and (-webkit-min-device-pixel-ratio:0) { .webkit { font-size:9px; -webkit-transform: scale(0.75) translate(-3px, 0px); letter-spacing: 1px;  } } ');
+
+       printWindow.document.write('</style>' );
+       printWindow.document.write('</head><body style="margin:0px 0px 0px 0px" onload="window.print();"');
+
+       printWindow.document.write('<div style="position: absolute; left:4px; height:200px; width:144px; top:4px; font-family:Arial,Gadget,sans-serif;"></div>');
+
+       printWindow.document.write('<div style="position: absolute; left:4px; height:200px; width:300px; top:4px; font-family:Arial,Gadget,sans-serif;">');
+       printWindow.document.write('  <div style="position:relative; left:0px; top:0px;"><p style="text-align:center; margin-top:0px; margin-bottom:0px; padding:0px;"><img src="https://api.unity-box.com/services/qrcodedetail/'+serial_number+'.png" style=" width:300px; height:200px; margin:0px 0px 0px 0px; " /></p></div>' );
+       printWindow.document.write('</div>' );
+
+       printWindow.document.write('</body></html> ');
+       printWindow.document.close();
+    }
+    
+    function trace_order(serial_number){
+      var box = UnityBox.box({selector:"#trace"});
+      box.trace_parcel(serial_number);
+    }
+  </script>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr class="info" >
+      <th>Product Name</th>
+      <th>Consignee Name</th>
+      <th>QRcode</th>
+      <th></th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for order in orders %}
+      <tr>
+        <td>{{order.product_name}}</td>
+        <td>{{order.consignee_name}}</td>
+        <td><a href="javascipr:void 0" onclick="print_qrcode('{{order.serial_number}}');" >print_qrcode</a></td>
+        <td><a href="javascipr:void 0" onclick="trace_order('{{order.serial_number}}');" >trace_order</a></td>
+      </tr>
+  {% else %}
+      <tr><td colspan="2" >Unbelievable.  No entries here so far</td></tr>
+  {% endfor %}
+    </tbody>
+  </table>
+  <div style="width:600px;margin:auto;height:500px;" id="trace">
+  </div>
+{% endblock %}

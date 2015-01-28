@@ -1,0 +1,99 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title></title>
+
+<!-- main JS libs -->
+<script src="{{ url_for('static', filename='js/libs/modernizr.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/jquery-1.10.0.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/jquery-ui.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/libs/jquery.maskedinput.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/unitybox.api.min.js') }}"></script>
+
+<!-- Style CSS -->
+<link href="{{ url_for('static', filename='css/bootstrap.css') }}" media="screen" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/demo.css') }}" media="screen" rel="stylesheet">
+
+<!-- scripts -->
+
+<!-- Include all needed stylesheets and scripts here -->
+
+
+
+
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+<!--[if gte IE 9]>
+<style type="text/css">
+    .gradient {filter: none !important;}
+</style>
+<![endif]-->
+</head>
+
+<body>
+    <div class="body_wrap">
+        <div class="container">
+            <div class="content " role="main">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="avatar"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></div>
+                    </div>
+                    <div class="col-sm-8">
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Website Menu -->
+                        <div id="topmenu">
+                            <ul class="dropdown clearfix boxed boxed-blue">
+                                <li class="menu-level-0"><a href="/"><span>HOME</span></a></li>
+                                <li class="menu-level-0"><a href="{{ url_for('add_order_page') }}"><span>NEW ORDER</span></a></li>
+                                <li class="menu-level-0"><a href="{{ url_for('show_orders') }}"><span>MY PARCELS</span></a></li>
+                                <li class="menu-level-0"><a href="#"><span>LOCATIONS</span></a></li>
+                            </ul>
+                        </div>
+                        <!--/ Website Menu -->
+                    </div>
+                </div>
+                {% for message in get_flashed_messages() %}
+                <div class=flash>{{ message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="account-page">
+            <div class="ub-container">
+                <div class="inner-panel">
+                {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <!--/ container -->
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
